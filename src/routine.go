@@ -149,6 +149,8 @@ func ConcurencyHTTP(list []int64, max int) []S {
 				resp, err := http.Get("http://localhost:8080")
 				if err != nil {
 					log.Println(err)
+					close(ch)
+					return
 				}
 				body, _ := ioutil.ReadAll(resp.Body)
 				defer resp.Body.Close()
@@ -175,7 +177,10 @@ func ConcurencyHTTP(list []int64, max int) []S {
 			k++
 		}
 		for l := 0; l < k; l++ {
-			in := <-ch
+			in, ok := <-ch
+			if !ok {
+				return listReturn
+			}
 			listReturn = append(listReturn, in.list[in.i:in.j]...)
 		}
 		return listReturn

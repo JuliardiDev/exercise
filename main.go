@@ -1,9 +1,10 @@
 package main
 
 import (
-	"exercise/src"
 	"log"
 	"net/http"
+
+	"github.com/exercise/src"
 )
 
 func main() {

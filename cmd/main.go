@@ -1,8 +1,9 @@
 package main
 
 import (
-	"exercise/src"
 	"fmt"
+
+	"github.com/exercise/src"
 )
 
 func main() {
@@ -10,6 +11,6 @@ func main() {
 	for i := 0; i < src.Length; i++ {
 		list = append(list, int64(i))
 	}
-
-	fmt.Println(src.ConcurencyHTTP(list, 10))
+	val := src.ConcurencyHTTP(list, 10)
+	fmt.Println(len(val))
 }
